@@ -1,329 +1,778 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-  <meta name="google-site-verification" content="Tz0q5rrlLCAHJC3nuuOcXu_MeEIBjM39cz-vmNF8xmc" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>S Pramoda | Finance × Cyber</title>
+    <meta charset="UTF-8">
+	<meta name="google-site-verification" content="Tz0q5rrlLCAHJC3nuuOcXu_MeEIBjM39cz-vmNF8xmc" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S. Pramoda | SmartFinOS Founder & Finance Tech</title>
+    
+    <!-- Premium Typography -->
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================
+           ROOT VARIABLES & RESET
+        ========================================== */
+        :root {
+            --bg-base: #050507; /* Deep Titanium / Graphite */
+            --text-main: #F3F3F5;
+            --text-muted: #8E8E93;
+            --border: rgba(255, 255, 255, 0.08);
+            --accent: #FFFFFF;
+        }
 
-<style>
-:root{
-  --red:#ff3b3b;
-  --soft:rgba(255,59,59,0.35);
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:"Courier New", monospace;
-}
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
 
-body{
-  background:#050b0f;
-  color:var(--red);
-  line-height:1.6;
-}
+        ::-webkit-scrollbar { width: 0px; } /* Hidden for Lenis Smooth Scroll */
+        ::selection { background: var(--text-main); color: var(--bg-base); }
 
-/* Scanlines */
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:repeating-linear-gradient(
-    to bottom,
-    rgba(255,59,59,0.04),
-    rgba(255,59,59,0.04) 1px,
-    transparent 1px,
-    transparent 3px
-  );
-  pointer-events:none;
-}
+        /* ==========================================
+           ATMOSPHERIC BACKGROUND (AURORA & NOISE)
+        ========================================== */
+        .noise-overlay {
+            position: fixed;
+            inset: 0;
+            width: 100vw; height: 100vh; height: 100dvh;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.04;
+            background: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)"/%3E%3C/svg%3E');
+        }
 
-/* HERO */
-.hero{
-  min-height:100vh;
-  background:
-    linear-gradient(rgba(5,11,15,0.88),rgba(5,11,15,0.88)),
-    url("images/intro-bg.jpg") center/cover no-repeat;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:40px;
-}
+        .aurora-bg {
+            position: fixed;
+            inset: 0;
+            width: 100vw; height: 100vh; height: 100dvh;
+            overflow: hidden;
+            z-index: -1;
+            background: var(--bg-base);
+        }
 
-.hero-buttons {
-  margin-top: 25px;
-}
+        .aurora-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.5;
+            will-change: transform;
+        }
 
-.btn {
-  display: inline-block;
-  padding: 12px 26px;
-  margin: 8px;
-  border: 2px solid var(--red);
-  color: var(--red);
-  text-decoration: none;
-  font-weight: bold;
-  border-radius: 6px;
-  box-shadow: 0 0 15px rgba(255,59,59,0.4);
-  transition: 0.3s;
-}
+        .orb-1 { width: 40vw; height: 40vw; background: rgba(30, 58, 95, 0.6); top: -10%; left: -10%; }
+        .orb-2 { width: 50vw; height: 50vw; background: rgba(42, 27, 84, 0.5); bottom: -20%; right: -10%; }
+        .orb-3 { width: 45vw; height: 45vw; background: rgba(28, 40, 51, 0.7); top: 40%; left: 40%; }
 
-.btn:hover {
-  background: var(--red);
-  color: #050b0f;
-}
+        /* ==========================================
+           TYPOGRAPHY & UTILITIES
+        ========================================== */
+        .font-display {
+            font-family: 'Clash Display', sans-serif;
+            font-weight: 500;
+        }
 
-.btn-outline {
-  opacity: 0.85;
-}
+        .text-huge {
+            font-size: clamp(2.5rem, 7vw, 9rem);
+            line-height: 1;
+            letter-spacing: -0.02em;
+        }
 
+        .text-large {
+            font-size: clamp(2rem, 5vw, 6rem);
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+        }
 
-.hero h1{
-  font-size:42px;
-  text-shadow:0 0 18px var(--red);
-}
+        .text-medium {
+            font-size: clamp(1.25rem, 3vw, 3rem);
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+        }
 
-.hero p{
-  color:#ffd2d2;
-  margin-top:15px;
-}
+        .container {
+            width: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 5vw;
+        }
 
-.cursor{
-  display:inline-block;
-  width:10px;
-  height:32px;
-  background:var(--red);
-  margin-left:5px;
-  animation:blink 1s infinite;
-}
+        /* Word Reveal Wrap CSS */
+        .word-wrap {
+            display: inline-block;
+            overflow: hidden;
+            vertical-align: top;
+        }
+        .word-inner {
+            display: inline-block;
+            transform: translateY(110%);
+            will-change: transform;
+        }
 
-@keyframes blink{
-  0%,50%,100%{opacity:1}
-  25%,75%{opacity:0}
-}
+        /* ==========================================
+           PAGE LOADER
+        ========================================== */
+        .loader {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-base);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .loader-text {
+            font-size: 2rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
 
-/* Sections */
-section{
-  padding:70px 30px;
-  max-width:1000px;
-  margin:auto;
-}
+        /* ==========================================
+           SECTIONS
+        ========================================== */
+        section { padding: 15vh 0; position: relative; }
+        .min-h-screen { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; justify-content: center; }
 
-.section-title{
-  font-size:28px;
-  margin-bottom:20px;
-  border-left:4px solid var(--red);
-  padding-left:12px;
-  text-shadow:0 0 12px var(--red);
-  min-height:34px;
-}
+        /* 1. HERO */
+        .hero { padding-top: 15vh; }
+        .hero-meta {
+            margin-top: 8vh;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            border-top: 1px solid var(--border);
+            padding-top: 2rem;
+            opacity: 0;
+        }
+        .meta-item {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+        }
 
-/* Cards */
-.card{
-  background:#07151b;
-  border:1px solid var(--soft);
-  padding:22px;
-  margin-bottom:25px;
-  color:#ffdada;
-}
+        /* 2. THE STORY */
+        .story-container { min-height: 300vh; position: relative; }
+        .story-sticky {
+            position: sticky;
+            top: 0; height: 100vh; height: 100dvh;
+            display: flex; justify-content: center; align-items: center;
+        }
+        .story-step {
+            position: absolute;
+            text-align: center;
+            opacity: 0;
+            transform: scale(0.9) translateY(40px);
+            padding: 0 5vw;
+        }
 
-/* Skills */
-.tags span{
-  display:inline-block;
-  border:1px solid var(--red);
-  padding:6px 12px;
-  margin:6px;
-  color:var(--red);
-}
+        /* 3. EXPERIENCE */
+        .timeline-item {
+            border-top: 1px solid var(--border);
+            padding: 4rem 0;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        @media(min-width: 900px) { .timeline-item { grid-template-columns: 1fr 2fr; } }
+        .exp-meta h3 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .exp-meta p { color: var(--text-muted); font-size: 1.1rem; }
+        .exp-desc p {
+            font-size: 1.25rem; color: #b0b0b0; line-height: 1.6; margin-bottom: 1.5rem;
+        }
 
-/* Footer */
-footer{
-  text-align:center;
-  padding:30px;
-  border-top:1px solid var(--soft);
-  color:#ffb3b3;
-}
-</style>
+        /* 4. TURNING POINT */
+        .turning-point { text-align: center; }
+
+        /* 5. SMARTFINOS INTRO */
+        .smartfinos-intro {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .os-badge {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 2rem;
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(10px);
+        }
+
+        /* 6. PRODUCT ECOSYSTEM (HORIZ SCROLL) */
+        .product-ecosystem { overflow: hidden; padding: 0; }
+        .ecosystem-wrapper { display: flex; width: 400vw; height: 100vh; height: 100dvh; }
+        .product-panel {
+            width: 100vw; height: 100vh; height: 100dvh;
+            display: flex; align-items: center;
+            padding: 0 5vw;
+            border-right: 1px solid rgba(255,255,255,0.05);
+        }
+        .product-card { max-width: 900px; width: 100%; }
+        .prod-status {
+            display: inline-block; padding: 0.5rem 1rem;
+            border: 1px solid var(--text-main); border-radius: 50px;
+            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em;
+            margin-bottom: 2rem;
+        }
+        .prod-status.ongoing { border-color: var(--text-muted); color: var(--text-muted); }
+        .prod-title { margin-bottom: 1.5rem; }
+        .prod-purpose { font-size: 1.5rem; color: var(--text-muted); margin-bottom: 3rem; line-height: 1.4; }
+        .prod-features {
+            list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
+        }
+        .prod-features li {
+            font-size: 1.1rem; display: flex; align-items: center; gap: 1rem;
+        }
+        .prod-features li::before {
+            content: ""; width: 6px; height: 6px; background: var(--text-main); border-radius: 50%; flex-shrink: 0;
+        }
+
+        /* 7. CYBERSECURITY IDENTITY */
+        .cyber-identity { padding: 20vh 0; }
+        .cyber-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; }
+        @media(min-width: 900px) { .cyber-grid { grid-template-columns: 1fr 1fr; } }
+        .cyber-list { list-style: none; border-top: 1px solid var(--border); }
+        .cyber-list li {
+            padding: 1.5rem 0; border-bottom: 1px solid var(--border);
+            font-size: 1.4rem; color: var(--text-muted);
+            transition: color 0.4s ease;
+        }
+        .cyber-list li:hover { color: var(--text-main); }
+
+        /* 8. NUMBERS */
+        .numbers-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+        @media(min-width: 768px) { .numbers-grid { grid-template-columns: repeat(4, 1fr); gap: 4rem; } }
+        .stat-box { border: 1px solid var(--border); padding: 4rem 2rem; text-align: center; border-radius: 12px; background: rgba(255,255,255,0.02); backdrop-filter: blur(10px); }
+        .stat-val { font-size: 4rem; display: flex; justify-content: center; align-items: center; margin-bottom: 1rem; }
+        .stat-label { color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.85rem; }
+
+        /* 9. PLATFORM / DOWNLOADS */
+        .platform-list { margin-top: 4rem; border-top: 1px solid var(--border); }
+        .platform-item {
+            display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start;
+            padding: 3rem 0; border-bottom: 1px solid var(--border); transition: padding-left 0.4s ease;
+            gap: 1.5rem;
+        }
+        @media(min-width: 768px) { .platform-item { flex-direction: row; align-items: center; gap: 0; } }
+        @media(hover: hover) { .platform-item:hover { padding-left: 2rem; } }
+        .plat-info h3 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .plat-info p { color: var(--text-muted); }
+        .plat-btn {
+            padding: 1rem 2.5rem; background: transparent; color: var(--text-main);
+            border: 1px solid var(--text-main); border-radius: 100px;
+            text-decoration: none; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.1em;
+            transition: all 0.3s ease; cursor: pointer; text-align: center;
+        }
+        .plat-btn:hover { background: var(--text-main); color: var(--bg-base); }
+        .plat-btn.disabled { opacity: 0.3; border-color: var(--text-muted); color: var(--text-muted); pointer-events: none; }
+
+        /* 10. CONTACT */
+        .contact-section { text-align: center; padding-bottom: 5vh; }
+        .social-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 3rem; margin: 5rem 0; }
+        .social-links a {
+            color: var(--text-main); text-decoration: none; font-size: 1.2rem;
+            text-transform: uppercase; letter-spacing: 0.1em; position: relative; padding: 1rem; display: inline-block;
+        }
+        .footer-meta { margin-top: 10rem; border-top: 1px solid var(--border); padding-top: 2rem; color: var(--text-muted); display: flex; justify-content: space-between; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; flex-wrap: wrap; gap: 1rem; }
+
+        /* MAGNETIC BUTTON UTILITY */
+        .magnetic { display: inline-block; }
+
+        /* ==========================================
+           MOBILE OPTIMIZATIONS
+        ========================================== */
+        @media(max-width: 768px) {
+            .text-huge { font-size: clamp(2.5rem, 10vw, 4rem); }
+            .text-large { font-size: clamp(2rem, 8vw, 3rem); }
+            .text-medium { font-size: clamp(1.2rem, 5vw, 2rem); }
+            
+            .timeline-item { padding: 3rem 0; gap: 1rem; }
+            .exp-meta h3 { font-size: 1.5rem; }
+            .exp-desc p { font-size: 1.1rem; }
+            
+            .ecosystem-wrapper { width: 100%; height: auto; flex-direction: column; }
+            .product-panel { width: 100%; height: auto; padding: 15vh 5vw; border-right: none; border-bottom: 1px solid var(--border); }
+            .prod-features { grid-template-columns: 1fr; gap: 1rem; }
+            .prod-purpose { font-size: 1.2rem; margin-bottom: 2rem; }
+
+            .cyber-grid { gap: 2rem; }
+            .cyber-list li { font-size: 1.1rem; padding: 1rem 0; }
+
+            .stat-box { padding: 2rem 1rem; }
+            .stat-val { font-size: 2.5rem; }
+
+            .platform-item { align-items: stretch; }
+            .plat-btn { width: 100%; }
+
+            .social-links { gap: 1rem; flex-direction: column; align-items: center; margin: 3rem 0; }
+            .social-links a { font-size: 1rem; padding: 0.5rem; }
+            .footer-meta { margin-top: 5rem; flex-direction: column; text-align: center; }
+
+            /* Reduce performance load on mobile */
+            .aurora-orb { filter: blur(60px); }
+        }
+    </style>
 </head>
-
 <body>
 
-<!-- HERO -->
-<div class="hero">
-  <div>
-    <h1 id="typed-name"></h1><span class="cursor"></span>
-    <p id="typed-role"></p>
-    <div class="hero-buttons">
-  <a href="https://drive.google.com/drive/folders/1Xje_T2UwNpGDLx4aK09yfDrEMYiTSUlL"
-     target="_blank" class="btn">
-     Resume
-  </a>
+    <!-- ATMOSPHERE -->
+    <div class="noise-overlay"></div>
+    <div class="aurora-bg">
+        <div class="aurora-orb orb-1"></div>
+        <div class="aurora-orb orb-2"></div>
+        <div class="aurora-orb orb-3"></div>
+    </div>
 
-  <a href="https://drive.google.com/drive/folders/16fk7b6dPtIc5u9zkm9P1aiBMW9nGyonO"
-     target="_blank" class="btn btn-outline">
-     Showcase
-  </a>
-</div>
+    <!-- LOADER -->
+    <div class="loader">
+        <div class="loader-text font-display">MR_WHO</div>
+    </div>
 
-  </div>
-</div>
+    <!-- 1. HERO -->
+    <section class="hero min-h-screen container">
+        <h1 class="text-huge font-display split-text">Where Finance<br>Meets Technology.</h1>
+        
+        <div class="hero-meta">
+            <div class="meta-item">S. Pramoda</div>
+            <div class="meta-item">Finance Professional</div>
+            <div class="meta-item">Software Builder</div>
+            <div class="meta-item">Cybersecurity Researcher</div>
+        </div>
+    </section>
 
-<section>
-  <div class="section-title typing" data-text="About Me"></div>
-  <div class="card">
-    <p>
-      I am S. Pramoda, a Bachelor of Commerce (B.Com) graduate with a strong interest in finance, taxation, and technology. Over the past 6 plus months, I have gained experience in GST compliance and accounting operations, giving me practical exposure to real-world industry workflows.
+    <!-- 2. THE STORY -->
+    <section class="story-container">
+        <div class="story-sticky container">
+            <h2 class="text-large font-display story-step">Commerce Student.</h2>
+            <h2 class="text-large font-display story-step">Junior Accountant.</h2>
+            <h2 class="text-large font-display story-step">GST Professional.</h2>
+            <h2 class="text-large font-display story-step">Cybersecurity Researcher.</h2>
+            <h2 class="text-large font-display story-step">Software Builder.</h2>
+            <h2 class="text-large font-display story-step">Smart thinker.</h2>
+        </div>
+    </section>
 
-My experience includes GST return filing (GSTR-1 and GSTR-3B), bookkeeping, GST reconciliation, and maintaining accounts using Tally ERP 9. Through this work, I have developed a solid understanding of accuracy, statutory compliance, and efficient financial record management. </p>
-    <p>
-     Alongside commerce, I have a strong interest in cybersecurity and bug bounty hunting. I actively explore and identify vulnerabilities such as XSS, API misconfigurations, and SQL injection. This cross-disciplinary knowledge enhances my analytical thinking, attention to detail, and problem-solving abilities, which also reflect positively in my accounting and compliance work.
+    <!-- 3. EXPERIENCE -->
+    <section class="container" style="padding-top: 10vh;">
+        <div class="os-badge" style="display:inline-block; margin-bottom: 2rem;">12+ Months Experience</div>
+        <h2 class="text-medium font-display split-text" style="margin-bottom: 5rem;">Professional Timeline</h2>
+        
+        <div class="timeline-item reveal-up">
+            <div class="exp-meta">
+                <h3 class="font-display">Accounts & Audit Assistant</h3>
+                <p>KC Associates • Present</p>
+            </div>
+            <div class="exp-desc">
+                <p>Handling critical GST filings (GSTR-1 & GSTR-3B) and ITC reconciliation with GSTR-2B. Operating in an environment where even a ₹1 mismatch demands forensic investigation.</p>
+                <p>Cross-checking TDS credits with Form 26AS and AIS, ensuring absolute reality in deductions.</p>
+                <p>Assisting in balance sheet preparation under strict compliance deadlines. Learning firsthand the weight of accuracy where margins for error do not exist.</p>
+            </div>
+        </div>
 
-My long-term goal is to grow into a finance professional who not only manages numbers but also leverages technology and security awareness to add greater value to organizations. I am highly motivated, adaptable, and committed to continuous learning and practical application of knowledge.</p>
-    <p>
-      My goal is to become a finance professional who understands not only how money moves,
-      but also how technology secures—or exposes—it.
-    </p>
-  </div>
-</section>
+        <div class="timeline-item reveal-up">
+            <div class="exp-meta">
+                <h3 class="font-display">Junior Accountant</h3>
+                <p>Balakrishna Rao A • Jun - Oct 2025</p>
+            </div>
+            <div class="exp-desc">
+                <p>Managed live accounting data in Tally ERP 9, handling day-to-day entries where a single misaligned voucher cascaded into systemic discrepancies.</p>
+                <p>Prepared and filed GST returns and E-way bills, building an understanding that statutory compliance runs exclusively on deadlines, not excuses.</p>
+                <p>Mastered complex bank entries and reconciliations, building a foundational respect for clean, mathematically flawless ledgers.</p>
+            </div>
+        </div>
+    </section>
 
-<section>
-  <div class="section-title typing" data-text="Experience"></div>
+    <!-- 4. THE TURNING POINT -->
+    <section class="min-h-screen turning-point container">
+        <h2 class="text-large font-display split-text">I got tired of doing the same work twice. <br>So I built software that does it forever.</h2>
+    </section>
 
-  <div class="card">
-    <strong> Accounts & Audit Assistant </strong><br>
-   <b><I> KC Associates | Nov 2025 – Present </b></I>
-    <p>
-      ⦁	Handling GST filings (GSTR-1 & GSTR-3B) and ITC reconciliation with GSTR-2B, where even a ₹1 mismatch demands investigation worthy of a detective.  </p>
+    <!-- 5. SMARTFINOS INTRO -->
+    <section class="min-h-screen smartfinos-intro container">
+        <div class="os-badge reveal-up">The Ecosystem</div>
+        <h2 class="text-large font-display reveal-up" style="margin-bottom: 2rem;">SmartFinOS</h2>
+        <p class="text-medium text-muted reveal-up" style="max-width: 900px;">A growing ecosystem of accounting automation software. One vision. Multiple tools. Built to eliminate repetitive accounting work.</p>
+    </section>
 
-    <p> ⦁ Cross-checking TDS credits with Form 26AS and AIS, ensuring deductions actually exist in reality and not just on paper.  </p>
+    <!-- 6. PRODUCT ECOSYSTEM -->
+    <section class="product-ecosystem">
+        <div class="ecosystem-wrapper">
+            
+            <!-- Product 1 -->
+            <div class="product-panel">
+                <div class="product-card">
+                    <div class="prod-status font-display">Released</div>
+                    <h2 class="text-large font-display prod-title">SMART 2B RECO</h2>
+                    <p class="prod-purpose">GST Reconciliation Software</p>
+                    <ul class="prod-features">
+                        <li>GSTR-2B Reconciliation</li>
+                        <li>Intelligent Matching Engine</li>
+                        <li>Accountant Focused Workflow</li>
+                        <li>100% Offline Processing</li>
+                    </ul>
+                </div>
+            </div>
 
-      <p>⦁ Assisting in balance sheet preparation, learning firsthand how small errors can create very big questions. </p>
+            <!-- Product 2 -->
+            <div class="product-panel">
+                <div class="product-card">
+                    <div class="prod-status font-display">Released</div>
+                    <h2 class="text-large font-display prod-title">SMARTBANK EXTRACTOR</h2>
+                    <p class="prod-purpose">Universal Bank PDF to Excel Converter</p>
+                    <ul class="prod-features">
+                        <li>Smart Transaction Detection</li>
+                        <li>Universal Parsing Engine</li>
+                        <li>Instant Excel Export</li>
+                        <li>Local Offline Processing</li>
+                    </ul>
+                </div>
+            </div>
 
-      <p>⦁ Working on live compliance matters where deadlines are strict, numbers must agree, and accuracy is not optional—because the tax department doesn’t appreciate “almost correct"
+            <!-- Product 3 -->
+            <div class="product-panel">
+                <div class="product-card">
+                    <div class="prod-status font-display ongoing">Ongoing Development</div>
+                    <h2 class="text-large font-display prod-title">BANKX TALLY</h2>
+                    <p class="prod-purpose">Convert Bank Statements into Tally Entries</p>
+                    <ul class="prod-features">
+                        <li>Statement Analysis</li>
+                        <li>Tally XML Generation</li>
+                        <li>Voucher Automation</li>
+                        <li>Reduced Manual Work</li>
+                    </ul>
+                </div>
+            </div>
 
-    </p>
-  </div>
+            <!-- Product 4 -->
+            <div class="product-panel">
+                <div class="product-card">
+                    <div class="prod-status font-display ongoing">Planning Stage</div>
+                    <h2 class="text-large font-display prod-title">SALES X TALLY</h2>
+                    <p class="prod-purpose">Convert Sales Registers into Tally XML</p>
+                    <ul class="prod-features">
+                        <li>Sales Automation</li>
+                        <li>Ledger Mapping</li>
+                        <li>Bulk Voucher Creation</li>
+                        <li>Workflow Optimization</li>
+                    </ul>
+                </div>
+            </div>
 
-  <div class="card">
-    <strong> Junior Accountant </strong><br>
-   <b><I> Under Balakrishna Rao A | Jun 2025 – Oct 2025 </b></I>
-    <p>⦁ Worked on live accounting data in Tally ERP 9, handling day-to-day entries where one wrong voucher could ruin the entire day.</p>
-    <p>⦁ Prepared and assisted in filing GST returns and E-way bills, learning that compliance runs on deadlines, not excuses. </p>
-    <p>⦁ Managed bank entries and reconciliations, ensuring books and bank statements eventually agreed after a fair amount of patience.</p>
-    <p>⦁ This role built discipline, consistency, and a deep respect for clean numbers—because messy books always come back for explanations.</p>
-  </div>
-</section>
+        </div>
+    </section>
 
-<section>
-  <div class="section-title typing" data-text="Education"></div>
-  <div class="card">
-    <ul>
-      <li>B.Com (2022–2025) – Vivekananda College, Puttur – 92.79%</li>
-      <li>12th  (2020-2022) – Vivekananda PU College – 93.83%</li>
-      <li>SSLC (2019-2020) – Blessed Kuriakose High School – 92.16%</li>
-     <b> ╰┈➤I believe </b><I>“Good marks are numbers on paper — skills and understanding do the real work.”</I>
-    </ul>
-  </div>
-</section>
+    <!-- 7. CYBERSECURITY IDENTITY -->
+    <section class="cyber-identity container">
+        <div class="cyber-grid">
+            <div>
+                <div class="os-badge reveal-up">Parallel Identity</div>
+                <h2 class="text-large font-display split-text">Cybersecurity<br>Researcher.</h2>
+                <p class="text-muted reveal-up" style="margin-top: 2rem; font-size: 1.2rem; max-width: 400px;">
+                    This is not just a skill. It's how I view digital architecture. Understanding how systems are built means understanding how they break.
+                </p>
+            </div>
+            <div>
+                <ul class="cyber-list font-display reveal-up">
+                    <li>Bug Bounty Hunting</li>
+                    <li>API Security Analysis</li>
+                    <li>Cross-Site Scripting (XSS) Research</li>
+                    <li>SQL Injection Identification</li>
+                    <li>Responsible Disclosure</li>
+                    <li>Government Website Security Reporting</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-<section>
-  <div class="section-title typing" data-text="Skills"></div>
-  <div class="card tags">
-    <span>► Tally ERP 9 / Tally Prime</span>
-    <span>► GST Filing</span>
-    <span>► ITC Reconciliation</span>
-    <span>► Income Tax</span>
-    <span>► XSS</span>
-    <span>► API Security</span>
-    <span>► SQL Injection</span>
-    <span>► Linux</span>
-    <span>► Bug Bounty</span>
-  </div>
-</section>
+    <!-- 8. NUMBERS -->
+    <section class="container" style="padding: 10vh 5vw;">
+        <div class="numbers-grid reveal-up">
+            <div class="stat-box">
+                <div class="stat-val font-display"><span class="counter" data-target="92">0</span><span style="font-size: 2.5rem;">.79%</span></div>
+                <div class="stat-label">B.Com Graduation</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-val font-display"><span class="counter" data-target="12">0</span><span style="font-size: 2.5rem; color: var(--text-muted);">+</span></div>
+                <div class="stat-label">Months Experience</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-val font-display"><span class="counter" data-target="4">0</span></div>
+                <div class="stat-label">Software Products</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-val font-display"><span class="counter" data-target="5">0</span><span style="font-size: 2.5rem; color: var(--text-muted);">+</span></div>
+                <div class="stat-label">Certifications</div>
+            </div>
+        </div>
+    </section>
 
-<section>
-  <div class="section-title typing" data-text="Certifications & Achievements"></div>
-  <div class="card">
-    <ul>
-      <li>Diploma in Computer Financial Accounting – Keonics</li>
-      <li>Excel (Basic to Advanced) – Udemy</li>
-      <li>ChatGPT for Accounting – Great Learning</li>
-      <li>Reported security issues on Indian government websites</li>
-      <li>Active on Bugcrowd, Hackerone and self hosted platforms</li>
-    </ul>
-  </div>
-</section>
+    <!-- 9. SMARTFINOS PLATFORM -->
+    <section class="container">
+        <h2 class="text-large font-display split-text">SmartFinOS Platform</h2>
+        <p class="text-muted reveal-up" style="font-size: 1.2rem; margin-top: 1rem;">Accounting Automation Ecosystem Distribution</p>
 
-<section>
-  <div class="section-title typing" data-text="Projects"></div>
-  <div class="card">
-    <strong>Quick Commerce Consumer Study</strong>
-    <p>
-      Studied logistics, warehouse strategy, and consumer mindset in semi-urban India.
-    </p>
-  </div>
+        <div class="platform-list reveal-up">
+            <div class="platform-item">
+                <div class="plat-info">
+                    <h3 class="font-display">SMART 2B RECO</h3>
+                    <p>Released</p>
+                </div>
+                <a href="https://smartfinos.vercel.app" target="_blank" class="plat-btn magnetic">Visit</a>
+            </div>
+            <div class="platform-item">
+                <div class="plat-info">
+                    <h3 class="font-display">SMARTBANK EXTRACTOR</h3>
+                    <p>Released</p>
+                </div>
+                <a href="https://smartfinos.vercel.app" target="_blank" class="plat-btn magnetic">Visit</a>
+            </div>
+            <div class="platform-item">
+                <div class="plat-info">
+                    <h3 class="font-display">BANKX TALLY</h3>
+                    <p>In Development</p>
+                </div>
+                <div class="plat-btn disabled">Coming Soon</div>
+            </div>
+            <div class="platform-item">
+                <div class="plat-info">
+                    <h3 class="font-display">SALES X TALLY</h3>
+                    <p>Planning Stage</p>
+                </div>
+                <div class="plat-btn disabled">Coming Soon</div>
+            </div>
+        </div>
+    </section>
 
-  <div class="card">
-    <strong>Consumer Satisfaction Towards Netflix</strong>
-    <p>
-      Analyzed content preferences, retention strategies, and platform adaptation and more.
-    </p>
-  </div>
-</section>
+    <!-- 10. CONTACT -->
+    <section class="min-h-screen contact-section container">
+        <h2 class="text-huge font-display split-text">The Story  <br>Continues Here</h2>
+        
+        <div class="social-links reveal-up">
+            <a href="https://drive.google.com/drive/folders/1Xje_T2UwNpGDLx4aK09yfDrEMYiTSUlL" target="_blank" class="magnetic">Resume</a>
+            <a href="https://drive.google.com/drive/folders/16fk7b6dPtIc5u9zkm9P1aiBMW9nGyonO" target="_blank" class="magnetic">Showcase</a>
+            <a href="https://smartfinos.vercel.app/" target="_blank" class="magnetic">SmartFinOS (Official)</a>
+            <a href="https://linkedin.com/in/spramoda4" target="_blank" class="magnetic">LinkedIn</a>
+            <a href="mailto:spramoda004@gmail.com" class="magnetic">Email</a>
+            <a href="https://www.instagram.com/its_me_pramoda" target="_blank" class="magnetic">Instagram</a>
+        </div>
 
-<footer>
-  <p> ༻❁༺ <b>CONNECT WITH ME</b> ༻❁༺ </p>
-  <p>
-    <a href="https://linkedin.com/in/spramoda4" target="_blank">LinkedIn</a> |
-    <a href="mailto:spramoda004@gmail.com">Email</a> |
-    <a href="https://www.instagram.com/its_me_pramoda?igsh=MThuYXRkdmhvbHNxbg==">Instagram</a>
-  </p>
-  <p>© S Pramoda [MR_WHO]</p>
-</footer>
+        <div class="footer-meta">
+            <div>© 2026 S. Pramoda</div>
+            <div>MR_WHO</div>
+            <div>Thanks for the visit!!</div>
+        </div>
+    </section>
 
-<script>
-/* HERO TYPING */
-const nameText = "╰─▸@[S Pramoda]";
-const roleText = " Accountant | B.Com Graduate | GST & Accounting | Hacker";
+    <!-- SCRIPTS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
 
-let n=0,r=0;
-const nameEl=document.getElementById("typed-name");
-const roleEl=document.getElementById("typed-role");
+    <script>
+        // 1. TEXT SPLIT UTILITY (For Cinematic Reveals)
+        document.querySelectorAll('.split-text').forEach(el => {
+            const text = el.innerText;
+            el.innerHTML = '';
+            text.split(' ').forEach(word => {
+                const wrap = document.createElement('span');
+                wrap.className = 'word-wrap';
+                const inner = document.createElement('span');
+                inner.className = 'word-inner';
+                inner.innerHTML = word + '&nbsp;';
+                wrap.appendChild(inner);
+                el.appendChild(wrap);
+            });
+        });
 
-function typeName(){
-  if(n<nameText.length){
-    nameEl.textContent+=nameText[n++];
-    setTimeout(typeName,90);
-  }else setTimeout(typeRole,400);
-}
-function typeRole(){
-  if(r<roleText.length){
-    roleEl.textContent+=roleText[r++];
-    setTimeout(typeRole,40);
-  }
-}
-window.onload=typeName;
+        // 2. LENIS SMOOTH SCROLL (Optimized for Mobile)
+        const lenis = new Lenis({
+            duration: 1.5,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            touchMultiplier: 2
+        });
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
 
-/* SECTION TITLE TYPING */
-document.querySelectorAll(".typing").forEach(el=>{
-  const text=el.dataset.text;
-  let i=0;
-  const obs=new IntersectionObserver(e=>{
-    if(e[0].isIntersecting){
-      const t=setInterval(()=>{
-        el.textContent+=text[i++]||"";
-        if(i>=text.length) clearInterval(t);
-      },80);
-      obs.disconnect();
-    }
-  });
-  obs.observe(el);
-});
-</script>
+        // 3. GSAP INITIALIZATION
+        gsap.registerPlugin(ScrollTrigger);
 
+        // Background Aurora Parallax Animation
+        gsap.to('.aurora-orb', {
+            y: "30vh",
+            x: "10vw",
+            rotation: 45,
+            duration: 15,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+            stagger: 2
+        });
+
+        // 4. LOADER & HERO TIMELINE
+        const tl = gsap.timeline();
+        tl.to('.loader-text', {
+            opacity: 0,
+            scale: 0.9,
+            duration: 1,
+            delay: 0.5,
+            ease: "power3.inOut"
+        })
+        .to('.loader', {
+            yPercent: -100,
+            duration: 1.2,
+            ease: "power4.inOut"
+        })
+        .to('.hero .word-inner', {
+            y: "0%",
+            duration: 1.2,
+            stagger: 0.08,
+            ease: "power4.out"
+        }, "-=0.6")
+        .to('.hero-meta', {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power2.out"
+        }, "-=0.8");
+
+        // 5. STORY SEQUENCE (PINNED SCROLL)
+        const storySteps = gsap.utils.toArray('.story-step');
+        const storyDuration = 1 / storySteps.length;
+
+        const storyTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".story-container",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 1.5,
+            }
+        });
+
+        storySteps.forEach((step, i) => {
+            storyTl.to(step, {
+                opacity: 1,
+                scale: 1,
+                y: 0,
+                duration: storyDuration * 0.4,
+                ease: "power2.out"
+            })
+            .to(step, { duration: storyDuration * 0.2 })
+            .to(step, {
+                opacity: i === storySteps.length - 1 ? 1 : 0,
+                scale: i === storySteps.length - 1 ? 1 : 1.1,
+                y: i === storySteps.length - 1 ? 0 : -40,
+                duration: storyDuration * 0.4,
+                ease: "power2.in"
+            });
+        });
+
+        // 6. GLOBAL REVEAL ANIMATIONS
+        gsap.utils.toArray('.split-text').forEach(el => {
+            // Skip hero as it's handled in loader timeline
+            if(el.closest('.hero')) return; 
+            
+            gsap.to(el.querySelectorAll('.word-inner'), {
+                scrollTrigger: {
+                    trigger: el,
+                    start: "top 85%",
+                },
+                y: "0%",
+                duration: 1.2,
+                stagger: 0.05,
+                ease: "power4.out"
+            });
+        });
+
+        gsap.utils.toArray('.reveal-up').forEach(el => {
+            gsap.fromTo(el, 
+                { opacity: 0, y: 50 },
+                {
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 85%",
+                    },
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.2,
+                    ease: "power3.out"
+                }
+            );
+        });
+
+        // 7. HORIZONTAL PRODUCT ECOSYSTEM
+        let mm = gsap.matchMedia();
+        mm.add("(min-width: 769px)", () => {
+            let panels = gsap.utils.toArray(".product-panel");
+            gsap.to(panels, {
+                xPercent: -100 * (panels.length - 1),
+                ease: "none",
+                scrollTrigger: {
+                    trigger: ".product-ecosystem",
+                    pin: true,
+                    scrub: 1,
+                    end: () => "+=" + document.querySelector(".ecosystem-wrapper").offsetWidth
+                }
+            });
+        });
+
+        // 8. ANIMATED COUNTERS
+        const counters = document.querySelectorAll('.counter');
+        counters.forEach(counter => {
+            ScrollTrigger.create({
+                trigger: counter,
+                start: "top 90%",
+                once: true,
+                onEnter: () => {
+                    const target = +counter.getAttribute('data-target');
+                    gsap.to(counter, {
+                        innerHTML: target,
+                        duration: 2.5,
+                        snap: { innerHTML: 1 },
+                        ease: "power3.out"
+                    });
+                }
+            });
+        });
+
+        // 9. MAGNETIC BUTTONS (Only initialize for pointer devices to keep mobile taps smooth)
+        if (window.matchMedia("(pointer: fine)").matches) {
+            const magneticElements = document.querySelectorAll('.magnetic');
+            magneticElements.forEach((elem) => {
+                elem.addEventListener('mousemove', (e) => {
+                    const rect = elem.getBoundingClientRect();
+                    const x = (e.clientX - rect.left - rect.width / 2) * 0.4;
+                    const y = (e.clientY - rect.top - rect.height / 2) * 0.4;
+                    gsap.to(elem, { x: x, y: y, duration: 0.6, ease: "power3.out" });
+                });
+                elem.addEventListener('mouseleave', () => {
+                    gsap.to(elem, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.3)" });
+                });
+            });
+        }
+    </script>
 </body>
 </html>
-
-
