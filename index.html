@@ -28,6 +28,11 @@
             box-sizing: border-box;
         }
 
+        html {
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+
         body {
             background-color: var(--bg-base);
             color: var(--text-main);
@@ -35,6 +40,19 @@
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            -webkit-tap-highlight-color: transparent;
+            overscroll-behavior-y: none;
+        }
+
+        /* Smooth, consistent interaction feedback across devices */
+        a, button, .magnetic, .plat-btn, .prod-status, .stat-box, .platform-item {
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        img, svg {
+            max-width: 100%;
+            display: block;
         }
 
         ::-webkit-scrollbar { width: 0px; } /* Hidden for Lenis Smooth Scroll */
@@ -253,9 +271,10 @@
         .cyber-list li {
             padding: 1.5rem 0; border-bottom: 1px solid var(--border);
             font-size: 1.4rem; color: var(--text-muted);
-            transition: color 0.4s ease;
+            transition: color 0.4s cubic-bezier(0.22, 1, 0.36, 1), padding-left 0.4s cubic-bezier(0.22, 1, 0.36, 1);
         }
         .cyber-list li:hover { color: var(--text-main); }
+        @media(hover: hover) { .cyber-list li:hover { padding-left: 0.5rem; } }
 
         /* 8. NUMBERS */
         .numbers-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
@@ -268,7 +287,8 @@
         .platform-list { margin-top: 4rem; border-top: 1px solid var(--border); }
         .platform-item {
             display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start;
-            padding: 3rem 0; border-bottom: 1px solid var(--border); transition: padding-left 0.4s ease;
+            padding: 3rem 0; border-bottom: 1px solid var(--border);
+            transition: padding-left 0.5s cubic-bezier(0.22, 1, 0.36, 1);
             gap: 1.5rem;
         }
         @media(min-width: 768px) { .platform-item { flex-direction: row; align-items: center; gap: 0; } }
@@ -279,9 +299,12 @@
             padding: 1rem 2.5rem; background: transparent; color: var(--text-main);
             border: 1px solid var(--text-main); border-radius: 100px;
             text-decoration: none; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.1em;
-            transition: all 0.3s ease; cursor: pointer; text-align: center;
+            transition: background 0.35s cubic-bezier(0.22, 1, 0.36, 1), color 0.35s cubic-bezier(0.22, 1, 0.36, 1), transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+            cursor: pointer; text-align: center;
+            min-height: 44px; display: inline-flex; align-items: center; justify-content: center;
         }
         .plat-btn:hover { background: var(--text-main); color: var(--bg-base); }
+        .plat-btn:active { transform: scale(0.96); }
         .plat-btn.disabled { opacity: 0.3; border-color: var(--text-muted); color: var(--text-muted); pointer-events: none; }
 
         /* 10. CONTACT */
@@ -290,6 +313,21 @@
         .social-links a {
             color: var(--text-main); text-decoration: none; font-size: 1.2rem;
             text-transform: uppercase; letter-spacing: 0.1em; position: relative; padding: 1rem; display: inline-block;
+            transition: opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1), transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .social-links a::after {
+            content: ""; position: absolute; left: 1rem; right: 1rem; bottom: 0.4rem; height: 1px;
+            background: var(--text-main); transform: scaleX(0); transform-origin: left;
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        @media(hover: hover) { .social-links a:hover::after { transform: scaleX(1); } }
+        .social-links a:active { transform: scale(0.96); opacity: 0.7; }
+
+        .stat-box {
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.4s ease, background 0.4s ease;
+        }
+        @media(hover: hover) {
+            .stat-box:hover { transform: translateY(-6px); border-color: rgba(255,255,255,0.18); background: rgba(255,255,255,0.04); }
         }
         .footer-meta { margin-top: 10rem; border-top: 1px solid var(--border); padding-top: 2rem; color: var(--text-muted); display: flex; justify-content: space-between; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; flex-wrap: wrap; gap: 1rem; }
 
@@ -328,6 +366,20 @@
 
             /* Reduce performance load on mobile */
             .aurora-orb { filter: blur(60px); }
+
+            /* Larger, easier tap targets on touch screens */
+            .social-links a { padding: 0.85rem 1.25rem; }
+            .plat-btn { padding: 1rem 2rem; }
+        }
+
+        /* Respect users who prefer reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
         }
     </style>
 </head>
@@ -464,7 +516,7 @@
             <!-- Product 3 -->
             <div class="product-panel">
                 <div class="product-card">
-                    <div class="prod-status font-display ongoing">Ongoing Development</div>
+                    <div class="prod-status font-display">Released</div>
                     <h2 class="text-large font-display prod-title">BANKX TALLY</h2>
                     <p class="prod-purpose">Convert Bank Statements into Tally Entries</p>
                     <ul class="prod-features">
@@ -479,12 +531,12 @@
             <!-- Product 4 -->
             <div class="product-panel">
                 <div class="product-card">
-                    <div class="prod-status font-display ongoing">Planning Stage</div>
-                    <h2 class="text-large font-display prod-title">SALES X TALLY</h2>
-                    <p class="prod-purpose">Convert Sales Registers into Tally XML</p>
+                    <div class="prod-status font-display ongoing">Ongoing Development</div>
+                    <h2 class="text-large font-display prod-title">EXCEL X TALLY</h2>
+                    <p class="prod-purpose">Import Excel Files Directly into Tally</p>
                     <ul class="prod-features">
-                        <li>Sales Automation</li>
-                        <li>Ledger Mapping</li>
+                        <li>Excel Data Import</li>
+                        <li>Tally XML Generation</li>
                         <li>Bulk Voucher Creation</li>
                         <li>Workflow Optimization</li>
                     </ul>
@@ -562,14 +614,14 @@
             <div class="platform-item">
                 <div class="plat-info">
                     <h3 class="font-display">BANKX TALLY</h3>
-                    <p>In Development</p>
+                    <p>Released</p>
                 </div>
-                <div class="plat-btn disabled">Coming Soon</div>
+                <a href="https://smartfinos.vercel.app" target="_blank" class="plat-btn magnetic">Visit</a>
             </div>
             <div class="platform-item">
                 <div class="plat-info">
-                    <h3 class="font-display">SALES X TALLY</h3>
-                    <p>Planning Stage</p>
+                    <h3 class="font-display">EXCEL X TALLY</h3>
+                    <p>Ongoing Development</p>
                 </div>
                 <div class="plat-btn disabled">Coming Soon</div>
             </div>
@@ -618,19 +670,28 @@
         });
 
         // 2. LENIS SMOOTH SCROLL (Optimized for Mobile)
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
         const lenis = new Lenis({
-            duration: 1.5,
+            duration: prefersReducedMotion ? 0.1 : 1.5,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             direction: 'vertical',
             gestureDirection: 'vertical',
             smooth: true,
             touchMultiplier: 2
         });
-        function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
-        requestAnimationFrame(raf);
+        // Drive Lenis through GSAP's ticker (single raf loop) so it stays perfectly
+        // in sync with ScrollTrigger-pinned sections on both mobile and desktop.
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+        gsap.ticker.lagSmoothing(0);
+
+        // Recalculate pinned/horizontal sections cleanly after layout settles (orientation change, resize)
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => ScrollTrigger.refresh(), 200);
+        });
 
         // 3. GSAP INITIALIZATION
         gsap.registerPlugin(ScrollTrigger);
